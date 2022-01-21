@@ -10,133 +10,134 @@
 {% endblock nav %}
 
 {% block content %}
-<div class="container mt-5">
+    <div class="container mt-5">
 
-    <!-- breadcrumb -->
-    {% block breadcrumb %}
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">For Sale</li>
-            </ol>
-        </nav>
-    {% endblock breadcrumb %}
-    
-    <div class="my-4">
-        <h3>All properties for sale</h3>
-
-    </div>
-
-    <div class="row">
-        <!-- cards -->
-        <div class="col-lg-8">
-            {% for property in properties %}
-                <div class="row mb-4 border gx-0 shadow ">
-
-                    <!-- Property Images -->
-                    <div class="col-md-4">
-                        
-                        <a href="{% url 'property_detail' property.id %}">
-                            <img class="p-img" src="{{ property.images.all.first.images.url}}" alt="">
-                        </a>
-                    </div>
+        <!-- breadcrumb -->
+        {% block breadcrumb %}
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">For Sale</li>
+                </ol>
+            </nav>
+        {% endblock breadcrumb %}
         
-                    <!-- Property Details -->
-                    <div class="col-md-8 p-3 d-grid gap-3">
-                        <div class="d-flex flex-column">
-                            <div class="d-flex flex-row justify-content-between">
-                                <a class="p-title" href="{% url 'property_detail' property.id %}">{{ property.title }}</a>
-                                <span class="badge bg-primary p-2 fs-6">{{ property.get_property_status_display }}</span>
-                            </div>
-                            <span class="text-primary fs-4">R{{ property.price|intcomma }}</span>
-                        </div>
-                        <div class="d-flex mt-1">
-                            <box-icon name='map' ></box-icon>
-                            <p class="ms-3 mb-2">{{ property.address }}, {{ property.suburb }}, {{property.city }}, {{ property.get_province_display }}</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="d-flex">
-                                    <box-icon name='bed'></box-icon>
-                                    <span class="ms-3">{{ property.bedrooms }}</span>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex">
-                                    <box-icon name='bath'></box-icon>
-                                    <span class="ms-3">{{ property.bathrooms }}</span>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="d-flex">
-                                    <box-icon name='ruler' ></box-icon>
-                                    <span class="ms-3">{{ property.floor_size }}m&sup2;</span>
-                                </div>
-                                
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex">
-                                    <box-icon name='car-garage' type='solid' ></box-icon>
-                                    <span class="ms-3">{{ property.garage }}</span>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-6">
-                                <img class="rounded-circle" src="https://via.placeholder.com/30x30" alt="">
-                                <a class="ms-1" href="#agent-detail-page">Francois Paulsen</a>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex justify-content-end">
-                                    <box-icon name='calendar' type='solid' ></box-icon>
-                                    <span class="ms-3">{{ property.created_at|naturaltime }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+        <h3 class="my-4">All properties for sale</h3>
 
 
-        <!-- Sidebar -->
-        <div class="col-lg-4">
-            <div class="row">
-                <div class="col-12 bg-white border p-3 mb-3 shadow">
-                    <h3 class="mb-3">Recent Properties</h3>
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for property in recent_properties %}
-                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                    <img src="https://via.placeholder.com/800x800" class="d-block w-100" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>{{ property.title }}</h5>
-                                        <p>Some representative placeholder content for the first slide.</p>
+        <div class="row">
+            <!-- cards -->
+            <div class="col-lg-8">
+                {% for property in properties %}
+                    <div class="row mb-4 border gx-0 shadow ">
+
+                        <!-- Property Images -->
+                        <div class="col-md-4">
+                            
+                            <a href="{% url 'property_detail' property.id %}">
+                                <img class="p-img" src="{{ property.images.all.first.images.url}}" alt="">
+                            </a>
+                        </div>
+            
+                        <!-- Property Details -->
+                        <div class="col-md-8 p-3 d-grid gap-3">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <a class="p-title" href="{% url 'property_detail' property.id %}">{{ property.title }}</a>
+                                    <span class="badge bg-primary p-2 fs-6">{{ property.get_property_status_display }}</span>
+                                </div>
+                                <span class="text-primary fs-4">R{{ property.price|intcomma }}</span>
+                            </div>
+                            <div class="d-flex mt-1">
+                                <box-icon name='map' ></box-icon>
+                                <p class="ms-3 mb-2">{{ property.address }}, {{ property.suburb }}, {{property.city }}, {{ property.get_province_display }}</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex">
+                                        <box-icon name='bed'></box-icon>
+                                        <span class="ms-3">{{ property.bedrooms }}</span>
                                     </div>
                                 </div>
-                            {% endfor %}
+                                <div class="col-6">
+                                    <div class="d-flex">
+                                        <box-icon name='bath'></box-icon>
+                                        <span class="ms-3">{{ property.bathrooms }}</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex">
+                                        <box-icon name='ruler' ></box-icon>
+                                        <span class="ms-3">{{ property.floor_size }}m&sup2;</span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex">
+                                        <box-icon name='car-garage' type='solid' ></box-icon>
+                                        <span class="ms-3">{{ property.garage }}</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-6">
+                                    <img class="rounded-circle" src="https://via.placeholder.com/30x30" alt="">
+                                    <a class="ms-1" href="#agent-detail-page">Francois Paulsen</a>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-end">
+                                        <box-icon name='calendar' type='solid' ></box-icon>
+                                        <span class="ms-3">{{ property.created_at|naturaltime }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
-                </div>
-                <div class="col-12 bg-white border p-3 mb-3 shadow">
-                    <h3>Featured Properties</h3>
+                {% endfor %}
+            </div>
+
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-12 bg-white border p-3 mb-3 shadow">
+                        <h3 class="mb-3">Recent Properties</h3>
+                        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for property in recent_properties %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="https://via.placeholder.com/800x800" class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ property.title }}</h5>
+                                            <p>Some representative placeholder content for the first slide.</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 bg-white border p-3 mb-3 shadow">
+                        <h3>Featured Properties</h3>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
-    
-</div>
+
+    <!-- Footer outside the main container-->
+    {% include "includes/sections/footer.html" %}
 {% endblock content %}

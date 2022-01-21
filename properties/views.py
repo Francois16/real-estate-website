@@ -1,5 +1,6 @@
 from distutils.log import error
 from django.shortcuts import redirect, render
+from django.core.paginator import Paginator
 
 # models
 from .models import Property
@@ -15,8 +16,13 @@ def property_listview(request):
     properties = Property.objects.filter(property_status=Property.PropertyStatus.SALE)
     recent_properties = properties.reverse()[:5]
 
+    # Pagination
+    paginator = Paginator(properties, 1)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "properties": properties,
+        "properties": page_obj,
         "recent_properties": recent_properties,
     }
 

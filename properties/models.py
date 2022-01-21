@@ -61,11 +61,11 @@ class Property(models.Model):
     features = models.ManyToManyField("PropertyFeature", verbose_name="features")
 
     # Property Costs
-    Levies = models.SmallIntegerField(null=True, blank=True)
+    levies = models.SmallIntegerField(null=True, blank=True)
     rates_and_taxes = models.SmallIntegerField(null=True, blank=True)
 
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     is_reduced = models.BooleanField(default=False)
 

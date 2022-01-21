@@ -1,8 +1,12 @@
 :root {
-    --primary: salmon;
+    --primary: #fa8072;
 }
 body {
     background-color: #f5f7fb;
+}
+
+.primary {
+    color: var(--primary);
 }
 
 a {
@@ -43,7 +47,7 @@ a:hover {
 .title-underline:before{
     content: "";
     position: absolute;
-    width: 75%;
+    width: 60px;
     height: 1px;
     bottom: 0;
     left: 0;

@@ -3,60 +3,142 @@
 {% load humanize %}
 
 
-{% block breadcrumb %}
 
-{% endblock breadcrumb %}
 
 {% block content %}
     {% include "includes/navigation/navbar.html" %}
     <div class="container">
 
+        
         <div class="row w-75 mx-auto mt-5">
+            <!-- breadcrumb -->
+            {% block breadcrumb %}
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'property_list' %}">For Sale</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Property</li>
+                    </ol>
+                </nav>
+            {% endblock breadcrumb %}
             <div class="col-lg-8">
 
                 <div class="d-flex flex-column gap-3">
 
                     
                     
-                    <div class="row mb-5">
-                        <div class="col-8">
-                            <div class="d-flex flex-column">
-                                <h3>{{ property.title|title }}<span class="badge rounded-pill bg-primary fs-6 ms-2">{{ property.get_property_status_display }}</span></h3>
-                                <div class="d-flex flex-row">
-                                    <box-icon name='map' type='solid' color='#e40ac2' ></box-icon>
-                                    <span>{{ property.address }}, {{ property.suburb }}, {{ property.city }}, {{ property.get_province_display }}</span>
-                                </div>
-                            </div>
+                    <div> <!-- Prevent gap from flex to affect each item -->
+                        <div class="d-flex flex-row justify-content-between">
+                            <h3>{{ property.title|title }}</h3>
+                            <span class="fs-3 fw-bold primary">R{{ property.price|intcomma }}</span>
                         </div>
-                        <div class="col-4">
-                            <div class="d-flex flex-column align-items-end">
-                                <span class="fs-3 fw-bold">R{{ property.price|intcomma }}</span>
-                                <span>R{{ property.price_per_square_meter|intcomma }} / sqm</span>
+                        
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex flex-row">
+                                <box-icon name='map' type='solid' color='#fa8072' ></box-icon>
+                                <span class="ms-1">{{ property.address|title }}, {{ property.suburb|title }}, {{ property.city|title }}, {{ property.get_province_display|title }}</span>
                             </div>
+                            <span>R{{ property.price_per_square_meter|intcomma }} / sqm</span>
                         </div>
+                    </div>
+                     
+                  
+                    
+                    
+                    <div class="border rounded shadow bg-white p-3">
+                        <h4 class="title-underline mb-3">Gallery</h4>
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for image in property.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.images.url }}" class="d-block w-100" alt="image of property">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border rounded shadow bg-white p-3">
+                        <h4 class="title-underline">
+                            Description
+                        </h4>
+                        <p>{{ property.description|linebreaks }}</p>
+                        
                     </div>
                     
                     
                     <div class="border rounded shadow bg-white p-3">
-                        <h4 class="title-underline">Gallery</h4>
-                    </div>
-                    
-                    
-                    {% if property.features.all %}
-                    <div class="border rounded shadow bg-white p-3">
-                        <h4 class="title-underline">Amenities</h4>
-                        <div class="row gy-2 mt-3">
-                            {% for feature in property.features.all %}
-                                <div class="col-4">
-                                    <div class="d-flex">
-                                        <box-icon name='check-square' type='solid' color='#03a433' ></box-icon>
-                                        <span class="text-muted ms-1">{{ feature|title }}</span>
+                        <div class="row gy-3">
+
+                            <div class="col-12">
+                                <h4 class="title-underline">Property Details</h4>
+                            </div>
+                            <div class="col-12">
+                                <div class="row gy-2">
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Price: </strong>R{{ property.price|intcomma }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Type: </strong>{{ property.get_property_type_display }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Status: </strong>{{ property.get_property_status_display }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Bedrooms: </strong>{{ property.bedrooms }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Bathrooms: </strong>{{ property.bathrooms }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Garages: </strong>{{ property.garage }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Parking: </strong>{{ property.parking }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Floor: </strong>{{ property.floor_size }}m&sup2;</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Erf: </strong>{{ property.erf_size }}m&sup2;</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Levies: </strong>R{{ property.levies|intcomma }}</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="text-muted"><strong>Rates: </strong>R{{ property.rates_and_taxes|intcomma }}</span>
                                     </div>
                                 </div>
-                            {% endfor %}
+                            </div>
+                            
+                            
+                            {% if property.features.all %}
+                                <div class="col-12">
+                                    <h4 class="title-underline">Amenities</h4>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row gy-2">
+                                        {% for feature in property.features.all %}
+                                        <div class="col-4">
+                                            <div class="d-flex">
+                                                <box-icon name='check-square' type='solid' color='#03a433' ></box-icon>
+                                                <span class="text-muted ms-1">{{ feature|title }}</span>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                    {% endif %}
                     
                 </div>
                     
@@ -110,5 +192,9 @@
 
        
     </div>
-  
+
+    <!-- Footer outside the main container-->
+    {% include "includes/sections/footer.html" %}
+    
 {% endblock content %}
+    
