@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block breadcrumb %}
+
+{% endblock breadcrumb %}
+
+{% block content %}
+    {% include "includes/navigation/navbar.html" %}
+    <div class="container">
+
+        <div class="row w-75 mx-auto mt-5">
+            <div class="col-lg-8">
+
+                <div class="d-flex flex-column gap-3">
+
+                    
+                    
+                    <div class="row mb-5">
+                        <div class="col-8">
+                            <div class="d-flex flex-column">
+                                <h3>{{ property.title|title }}<span class="badge rounded-pill bg-primary fs-6 ms-2">{{ property.get_property_status_display }}</span></h3>
+                                <div class="d-flex flex-row">
+                                    <box-icon name='map' type='solid' color='#e40ac2' ></box-icon>
+                                    <span>{{ property.address }}, {{ property.suburb }}, {{ property.city }}, {{ property.get_province_display }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="d-flex flex-column align-items-end">
+                                <span class="fs-3 fw-bold">R{{ property.price|intcomma }}</span>
+                                <span>R{{ property.price_per_square_meter|intcomma }} / sqm</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="border rounded shadow bg-white p-3">
+                        <h4 class="title-underline">Gallery</h4>
+                    </div>
+                    
+                    
+                    {% if property.features.all %}
+                    <div class="border rounded shadow bg-white p-3">
+                        <h4 class="title-underline">Amenities</h4>
+                        <div class="row gy-2 mt-3">
+                            {% for feature in property.features.all %}
+                                <div class="col-4">
+                                    <div class="d-flex">
+                                        <box-icon name='check-square' type='solid' color='#03a433' ></box-icon>
+                                        <span class="text-muted ms-1">{{ feature|title }}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+                    
+                    
+            </div>
+            <div class="col-lg-4">
+                <div class="d-flex flex-column gap-3">
+                    <div class="border rounded bg-white shadow p-4">
+                        <div class="d-flex flex-row">
+                            <box-icon name='calendar'></box-icon>
+                            <h5 class="ms-2 text-capitalize">Schedule a tour</h5>
+                        </div>
+                        <hr class="text-muted">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <p>Add a contact form here to be sent to the correct estate agent</p>
+                            <button class="btn btn-primary w-100" type="submit">Submit Request</button>
+                        </form>
+                    </div>
+
+                    <div class="border rounder bg-white shadow p-4">
+                        <h4>Agent Information</h4>
+                        <hr>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <img class="img-fluid rounded-circle" style="width: 60px; height: 60px;" src="https://via.placeholder.com/300x300" alt="">
+                                </div>
+                                <div class="col">
+                                    <span class="d-block text-capitalize">Name of agent</span>
+                                    <span class="d-block text-capitalize">agent of property</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <box-icon type='solid' name='map'></box-icon>
+                                <span class="ms-2 text-muted">Address of agent</span>
+                            </div>
+                            <div class="d-flex">
+                                <box-icon name='phone' ></box-icon>
+                                <span class="ms-2 text-muted">Phone Number</span>
+                            </div>
+                            <div class="d-flex">
+                                <box-icon name='envelope' type='solid' ></box-icon>
+                                <span class="ms-2 text-muted">Email Address</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+  
+{% endblock content %}
