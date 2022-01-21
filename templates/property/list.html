@@ -99,6 +99,38 @@
                         </div>
                     </div>
                 {% endfor %}
+
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            
+                            <!-- Previous page-->
+                            {% if properties.has_previous %}
+                                <li class="page-item"><a class="page-link" href="{% url 'property_list' %}?page={{properties.previous_page_number}}"><span aria-hidden="true">&laquo;</span></a></li>
+                            {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#"><span aria-hidden="true">&laquo;</span></a></li>
+                            {% endif %}
+                            
+                            <!-- Current pages and available pages-->
+                            {% for num in properties.paginator.page_range %}
+                                
+                                {% if properties.number == num %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">{{ properties.number }}</a></li>
+                                {% elif num > properties.number|add:"-3" and num < properties.number|add:"3" %}
+                                    <li class="page-item"><a class="page-link" href="{% url 'property_list' %}?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                                
+                            {% endfor %}
+                            
+                            <!-- Next Section -->
+                            {% if properties.has_next %}
+                                <li class="page-item"><a class="page-link" href="{% url 'property_list' %}?page={{properties.next_page_number}}"><span aria-hidden="true">&raquo;</span></a></li>
+                            {% else %}
+                                <li class="page-item disabled"><a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a></li>
+                            {% endif %}
+                            
+                        </ul>
+                    </nav>
             </div>
 
 

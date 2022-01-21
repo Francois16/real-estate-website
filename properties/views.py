@@ -17,7 +17,7 @@ def property_listview(request):
     recent_properties = properties.reverse()[:5]
 
     # Pagination
-    paginator = Paginator(properties, 1)
+    paginator = Paginator(properties, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
