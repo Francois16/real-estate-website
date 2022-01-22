@@ -22,8 +22,12 @@
             </nav>
         {% endblock breadcrumb %}
         
+        
+        <!-- Property filter -->
+        {% include "includes/sections/filter.html" %}
+        
         <h3 class="my-4">All properties for sale</h3>
-
+        
 
         <div class="row">
             <!-- cards -->
@@ -103,7 +107,7 @@
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            
+                        
                             <!-- Previous page-->
                             {% if properties.has_previous %}
                                 <li class="page-item"><a class="page-link" href="{% url 'property_list' %}?page={{properties.previous_page_number}}"><span aria-hidden="true">&laquo;</span></a></li>

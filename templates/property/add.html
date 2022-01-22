@@ -7,25 +7,56 @@
 {% endblock nav %}
 
 {% block content %}
-    <div class="container mt-3 w-25">
-        <h2 class="mb-5">Add a new property</h2>
+    <div class="container border bg-white p-3 mt-3">
+        <h2 class="mb-2 primary">Create a new property listing</h2>
         <form action="{% url 'property_add' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {% comment %} {% for field in form %}
-                    {{ field.label_tag}}
-                    {% if field.html_name == "features" %}
-                        {% for sw in field.subwidgets %}
-                            {{ sw }}
-                        {% endfor %}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-            {% endfor %} {% endcomment %}
+            <h4 class='title-underline my-3'>Property Info</h4>
+            <div class="row">
+                <div class="col-6 col-lg-3">{{ form.title|as_crispy_field }}</div>
+                <div class="col-6 col-lg-3">{{ form.price|as_crispy_field }}</div>
+                <div class="col-6 col-lg-3">{{ form.property_type|as_crispy_field }}</div>
+                <div class="col-6 col-lg-3">{{ form.property_status|as_crispy_field }}</div>
+            </div>
+            <div class="row">
+                <div class="col-12">{{ form.description|as_crispy_field }}</div>
+            </div>
+            <h4 class='title-underline my-3'>Images</h4>
+            <div class="row">
+                <div class="col-12">{{ image_form.images|as_crispy_field }}</div>
+            </div>
+            <h4 class='title-underline my-3'>Location</h4>
+            <div class="row">
+                <div class="col-6 col-lg-3">{{ form.address|as_crispy_field }}</div>
+                <div class="col-6 col-lg-3">{{ form.city|as_crispy_field }}</div>
+                <div class="col-6 col-lg-3">{{ form.suburb|as_crispy_field }}</div>
+                <div class="col-6 col-lg-3">{{ form.province|as_crispy_field }}</div>
+            </div>
+            <h4 class='title-underline my-3'>Details</h4>
+            <div class="row">
+                <div class="col-6 col-lg-2">{{ form.bedrooms|as_crispy_field }}</div>
+                <div class="col-6 col-lg-2">{{ form.bathrooms|as_crispy_field }}</div>
+                <div class="col-6 col-lg-2">{{ form.garage|as_crispy_field }}</div>
+                <div class="col-6 col-lg-2">{{ form.parking|as_crispy_field }}</div>
+                <div class="col-6 col-lg-2">{{ form.floor_size|as_crispy_field }}</div>
+                <div class="col-6 col-lg-2">{{ form.erf_size|as_crispy_field }}</div>
+            </div>
+            <h4 class='title-underline my-3'>Features</h4>
+            <div class="row ">
+                <div class="col-12">{{ form.features|as_crispy_field }}</div>
+            </div>
+            <h4 class='title-underline my-3'>Costs</h4>
+            <div class="row">
+                <div class="col-3">{{ form.levies|as_crispy_field }}</div>
+                <div class="col-3">{{ form.rates_and_taxes|as_crispy_field }}</div>
+            </div>
+
+            
 
 
 
-            {{ form|crispy }}
-            {{ image_form|crispy }}
+
+
             <button class="btn btn-info my-3" type="submit">Add Property</button>
         </form>
     </div>

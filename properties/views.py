@@ -7,23 +7,34 @@ from .models import Property
 from .helpers import save_photos
 
 # Forms
-from .forms import AddPropertyForm, AddPropertyImagesForm
+from .forms import AddPropertyForm, AddPropertyImagesForm, PropertySearchForm
 
 
 def property_listview(request):
     template_name = "property/list.html"
 
-    properties = Property.objects.filter(property_status=Property.PropertyStatus.SALE)
+    if request.method == "POST":
+        search_form = PropertySearchForm(request.POST)
+
+        if search_form.is_valid():
+            print("Filtering based on criteria")
+
+    properties = Property.objects.filter(property_status=Property.PropertyStatus.SALE).order_by("-created_at")
     recent_properties = properties.reverse()[:5]
 
     # Pagination
     paginator = Paginator(properties, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    # End pagination
+
+    # Search form
+    search_form = PropertySearchForm()
 
     context = {
         "properties": page_obj,
         "recent_properties": recent_properties,
+        "search_form": search_form,
     }
 
     return render(request, template_name, context)

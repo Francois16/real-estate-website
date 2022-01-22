@@ -38,8 +38,8 @@ class Property(models.Model):
 
     # Property info
     title = models.CharField(max_length=255, default="")
-    property_type = models.CharField(max_length=3, choices=PropertyType.choices, null=True)
-    property_status = models.CharField(max_length=2, choices=PropertyStatus.choices, null=True)
+    property_type = models.CharField(max_length=4, choices=PropertyType.choices, null=True)
+    property_status = models.CharField(max_length=4, choices=PropertyStatus.choices, null=True)
     price = models.PositiveBigIntegerField()
     description = models.TextField(default="")
 
@@ -47,7 +47,7 @@ class Property(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255, null=True)
     suburb = models.CharField(max_length=255, null=True)
-    province = models.CharField(max_length=3, choices=Provinces.choices, null=True)
+    province = models.CharField(max_length=4, choices=Provinces.choices, null=True)
 
     # Property details
     bedrooms = models.PositiveSmallIntegerField(null=True)

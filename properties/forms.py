@@ -17,21 +17,8 @@ class AddPropertyForm(forms.ModelForm):
         queryset=PropertyFeature.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False,
+        label="",
     )
-
-    def __init__(self, *args, **kwargs):
-        super(AddPropertyForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            # We have a try/except block here because TextArea doesn't have an 'input_type'
-            # This will cause an AttributeError in which case we just add the 'form-control'
-            # class to it
-            try:
-                if visible.field.widget.input_type == "checkbox":
-                    visible.field.widget.attrs["class"] = "form-check-input mb-3"
-                else:
-                    visible.field.widget.attrs["class"] = "form-control mb-3"
-            except AttributeError:
-                visible.field.widget.attrs["class"] = "form-control mb-3"
 
 
 class AddPropertyImagesForm(forms.ModelForm):
@@ -41,9 +28,22 @@ class AddPropertyImagesForm(forms.ModelForm):
 
     images = forms.FileField(
         help_text="Please only add '.jpg' or '.png' image files",
+        label="",
         widget=forms.ClearableFileInput(
             attrs={
                 "multiple": True,
             }
         ),
     )
+
+
+class PropertySearchForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = (
+            "property_type",
+            "property_status",
+            "province",
+            "bedrooms",
+            "bathrooms",
+        )
