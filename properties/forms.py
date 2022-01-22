@@ -44,6 +44,4 @@ class PropertySearchForm(forms.ModelForm):
             "property_type",
             "property_status",
             "province",
-            "bedrooms",
-            "bathrooms",
         )

@@ -1,6 +1,7 @@
 from distutils.log import error
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # models
 from .models import Property
@@ -17,19 +18,29 @@ def property_listview(request):
         search_form = PropertySearchForm(request.POST)
 
         if search_form.is_valid():
-            print("Filtering based on criteria")
+            data = search_form.cleaned_data
 
-    properties = Property.objects.filter(property_status=Property.PropertyStatus.SALE).order_by("-created_at")
-    recent_properties = properties.reverse()[:5]
+            properties = Property.objects.filter(
+                property_status=data["property_status"],
+                property_type=data["property_type"],
+                province=data["province"],
+            )
+
+    else:
+        properties = Property.objects.filter(property_status=Property.PropertyStatus.SALE).order_by(
+            "-created_at"
+        )
+
+        # Search form
+        search_form = PropertySearchForm()
+
+    recent_properties = Property.objects.all().reverse()[:5]
 
     # Pagination
     paginator = Paginator(properties, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     # End pagination
-
-    # Search form
-    search_form = PropertySearchForm()
 
     context = {
         "properties": page_obj,
