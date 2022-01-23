@@ -164,6 +164,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # User
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-
 # Allauth config
 SITE_ID = 1
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_FORMS = {
+    "add_email": "allauth.account.forms.AddEmailForm",
+    "change_password": "allauth.account.forms.ChangePasswordForm",
+    "disconnect": "allauth.socialaccount.forms.DisconnectForm",
+    "login": "allauth.account.forms.LoginForm",
+    "reset_password": "allauth.account.forms.ResetPasswordForm",
+    "reset_password_from_key": "allauth.account.forms.ResetPasswordKeyForm",
+    "set_password": "allauth.account.forms.SetPasswordForm",
+    "signup": "accounts.forms.CustomUserCreationForm",
+    # "signup": "allauth.socialaccount.forms.SignupForm",
+}

@@ -1,3 +1,5 @@
+from turtle import settiltangle
+from django.conf import settings
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import get_user_model
 
