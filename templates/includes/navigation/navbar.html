@@ -30,6 +30,16 @@
                     <li class="nav-item">
                         <a class="nav-link uppercase border-start ms-3" href="{% url 'property_add' %}">+ Add new listing</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link uppercase border-start ms-3" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item border-start">
+                        <a href="{% url 'account_login' %}" class="nav-link">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'account_signup' %}" class="nav-link">Sign Up</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
