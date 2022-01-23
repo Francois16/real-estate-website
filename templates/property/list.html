@@ -37,7 +37,7 @@
                     <div class="row mb-4 border gx-0 shadow ">
 
                         <!-- Property Images -->
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             
                             <a href="{% url 'property_detail' property.id %}">
                                 <img class="p-img" src="{{ property.images.all.first.images.url}}" alt="">
@@ -45,7 +45,7 @@
                         </div>
             
                         <!-- Property Details -->
-                        <div class="col-md-8 p-3 d-grid gap-3">
+                        <div class="col-md-7 p-3 d-grid gap-3">
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-row justify-content-between">
                                     <a class="p-title" href="{% url 'property_detail' property.id %}">{{ property.title }}</a>

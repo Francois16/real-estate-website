@@ -44,8 +44,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.sites",
     # 3rd party
     "crispy_forms",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     # Local
     "accounts",
     "pages",
@@ -98,6 +102,12 @@ DATABASES = {
         "PORT": env("DB_PORT"),
     }
 }
+
+# Authentication Backends for AllAuth
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
 
 # Password validation
@@ -153,3 +163,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # User
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+
+# Allauth config
+SITE_ID = 1

@@ -5,22 +5,12 @@ body {
     background-color: #f5f7fb;
 }
 
-.primary {
+.primary-text {
     color: var(--primary);
 }
 
-a {
-    color: var(--primary);
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--primary);
-    text-decoration: underline;
-}
-
-.breadcrumb-item a {
-    color: var(--primary);
+.primary-bg {
+    background-color: var(--primary)
 }
 
 .p-title {
