@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+    {% include 'includes/navigation/navbar.html' %}
+{% endblock nav %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- breadcrumb -->
+        {% block breadcrumb %}
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Services - RM</li>
+                </ol>
+            </nav>
+        {% endblock breadcrumb %}
+        
+            <div class="d-flex flex-row justify-content-between">
+                <h1 class="title-underline">Property Rentals</h1>
+                <a class="btn primary-bg my-auto" href="">Contact Us!</a>
+            </div>
+        <p> 
+            <strong>Emerald Property Solutions offers the following service for clients who are in need of a great letting agent to rent out their properties.</strong> 
+            <br><br>
+            <strong>Emerald:</strong>
+                <ol>
+                    <li>Shall sign all leases on behalf of the client</li>
+                    <li>Shall receive all rentals and deposits directly from the tenant into the trust bank account of Emerald Property Solutions</li>
+                    <li>Shall pay all expenses from the rental before paying the rental across to the landlord.</li>
+                    <li>Shall furnish the tenant with monthly rental statements.</li>
+                    <li>Shall furnish the Landlord with monthly rental statements.</li>
+                    <li>Cannot be held liable for any rental which the tenant may not pay. If at any stage the tenant needs to be sued for outstanding rent, then the client must employ at his cost an attorney to attend to the matter.</li>
+                    <li>Cannot be held liable if at any stage a suitable tenant is not found for a property.</li>
+                    <li>Will ensure that the property is inspected every four/ six months at a cost of R280 plus VAT per inspection. A copy of the inspection to be sent to the client. The cost for the inspection shall be for the clients account.</li>
+                    <li>Will liaise with service providers to obtain quotes for repairs which will be submitted to the client for approval before the commencement of the work.</li>
+                    <li>Will ensure the work is inspected before payment is made. The client shall grant permission to Jade to repair any damages up to R1000.00 which may occur without the prior permission of the client, if the damages exceed R1000.00 then permission shall be obtained from the client. If the client is not available to grant permission on any repairs exceeding R1000.00 which could cause further damage to the property or the tenant and his property, then Emerald Property Solutions shall attend to the repair asap.
+                    Cannot be held liable for any damages which the tenant may incur.></li>
+                </ol>
+            <p>
+                The cost for above is 10% plus VAT on the monthly rental per property administered for all.  If at any stage the client is not happy with the services of Emerald Property Solutions this agreement can be cancelled immediately.
+            </p>
+            
+            <p>
+                We are able to assist clients in
+                <ul>
+                    <li>Western Cape</li>
+                    <li>Gauteng</li>
+                    <li>Bloemfontein</li>
+                </ul>
+            </p>
+    </div>
+
+    {% include 'includes/sections/footer.html' %}
+
+{% endblock content %}

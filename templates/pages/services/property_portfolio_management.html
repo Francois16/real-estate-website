@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+    {% include 'includes/navigation/navbar.html' %}
+{% endblock nav %}
+
+{% block content %}
+    <div class="container mt-5">
+         <!-- breadcrumb -->
+         {% block breadcrumb %}
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Services - PPM</li>
+                </ol>
+            </nav>
+        {% endblock breadcrumb %}
+
+        <h1>Property Portfolio Management</h1>
+        
+        <p class="fw-bold">
+            This service was developed to assist investment clients who have properties in different areas across the country
+             and do not have the time to control and manage their portfolio.  We take on the role of the Landlord and liaise 
+             with the Letting Agents on all aspects of the Investors Portfolio.  At the end of each month the Investor will 
+             receive a full report on his entire property portfolio.  Below are the services and  costs for this service.
+        </p>
+
+        <ol>
+            <li>PPM will recommend a good letting agent where possible, but the final choice will remain the choice of the client.</li>
+            <li>PPM will liaise with the Letting Agent so that the client no longer needs to do this./li>
+            <li>The client will give PPM, internet operator access to all the bank and bond account of each property.</li>
+            <li>PPM in conjunction with the Letting Agent will liaise with service providers to obtain quotes for repairs
+                which will be submitted to the client for approval before the commencement of the work.</li>
+            <li>PPM will ensure the work is inspected before payment is made.</li>
+            <li>Any further property purchases, the client will send the Offer to Purchase to the PPM and they will 
+                handle all further communication with the Estate Agent, Attorney, Bond Originator and Letting Agent. 
+                The client will at all times receive updates on the progress of the transaction from the PPM.</li>
+            <li>PPM will provide the client with a monthly Excel Spreadsheet monitoring the following:
+                <ol>
+                    <li>Rental payable</li>
+                    <li>Rent received</li>
+                    <li>Bond instalment paid</li>
+                    <li>Shortfall or surplus</li>
+                    <li>Levies and rates paid</li>
+                    <li>Maintenance and other costs paid</li>
+                    <li>Monthly remarks on each property, where necessary</li>
+                </ol>
+            </li>
+            <li>PPM ensures that all rates and levy accounts are up to date.</li>
+            <li>PPM handles all refinancing of properties once the client has decided which properties to refinance.</li>
+        </ol>
+        
+        <p>For the above services PPM will require the following information (the PPM service cannot commence until all the below requirements have been met):</p>
+ 
+        <ol>
+            <li>List of properties and Letting Agents</li>
+            <li>List of entities in which properties are registered</li>
+            <li>Letter of Authority for all Trusts showing IT number</li>
+            <li>Operator status on the clients bank accounts to check balances and to load payments for authorization by the client.</li>
+        </ol>
+
+        <p>
+            For the above the clients will receive a monthly invoice of R250 plus VAT per property administered for Treoc Platinum 
+            clients and R350 plus Vat per property administered for non Platinum clients. If at any stage the client is not happy 
+            with the services of the PPM this agreement can be cancelled immediately.
+        </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+    {% include 'includes/sections/footer.html' %}
+{% endblock content %}
