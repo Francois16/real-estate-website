@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "accounts",
     "pages",
     "properties",
+    "contact",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

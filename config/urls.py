@@ -23,6 +23,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("", include("pages.urls")),
     path("properties/", include("properties.urls")),
+    path("", include("contact.urls")),
 ]
 
 if settings.DEBUG:

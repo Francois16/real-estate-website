@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    {% include 'includes/navigation/navbar.html' %}
+    <div class="container">
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                {% block breadcrumb %}
+                    <!-- Breadcrumbs -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mt-5">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                        </ol>
+                    </nav>
+            
+                {% endblock breadcrumb %}
+
+                <h1>Contact Us</h1>
+                <form method="post" action="{% url 'send-email' %}">
+                    {% csrf_token %}
+                    <div class="row gy-3">
+                        <div class="col-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.subject|as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            {{ form.message|as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            <button class="btn primary-bg w-100" type="submit">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
