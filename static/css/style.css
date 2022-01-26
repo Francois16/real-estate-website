@@ -44,3 +44,7 @@ body {
     border-bottom: 3px solid var(--primary);
     border-radius: 5px;
 }
+
+iframe {
+    min-height: 400px;
+}

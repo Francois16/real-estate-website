@@ -19,17 +19,10 @@ def property_listview(request):
 
         if search_form.is_valid():
             data = search_form.cleaned_data
-
-            properties = Property.objects.filter(
-                property_status=data["property_status"],
-                property_type=data["property_type"],
-                province=data["province"],
-            )
+            properties = Property.objects.filter_from_form(data)
 
     else:
-        properties = Property.objects.filter(property_status=Property.PropertyStatus.SALE).order_by(
-            "-created_at"
-        )
+        properties = Property.objects.filter().all().order_by("-created_at")
 
         # Search form
         search_form = PropertySearchForm()

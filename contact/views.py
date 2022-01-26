@@ -1,5 +1,6 @@
+from email import message
 from django.shortcuts import redirect, render
-
+from django.contrib import messages
 
 # Forms
 from .forms import ContactForm
@@ -15,5 +16,11 @@ def contact_view(request):
 def _send_email(request):
 
     if request.method == "POST":
-        print("sending mail")
-        return redirect("home")
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            print("Sending E-mail is not implemented.")
+            messages.add_message(
+                request, messages.SUCCESS, "Thank you for contacting us! We will be in touch shortly."
+            )
+            return redirect("home")

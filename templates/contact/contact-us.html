@@ -8,20 +8,27 @@
     {% include 'includes/navigation/navbar.html' %}
     <div class="container">
         
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
+        <div class="row">
+            <div class="col-12">
                 {% block breadcrumb %}
                     <!-- Breadcrumbs -->
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mt-5">
-                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
-                        </ol>
-                    </nav>
-            
+                    <div class="col-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mt-5">
+                                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                            </ol>
+                        </nav>
+                    </div>
                 {% endblock breadcrumb %}
-
+            </div>
+        </div>
+        
+        <div class="row gy-3">
+            <div class="col-12">
                 <h1>Contact Us</h1>
+            </div>
+            <div class="col-md-12 col-lg-6">
                 <form method="post" action="{% url 'send-email' %}">
                     {% csrf_token %}
                     <div class="row gy-3">
@@ -45,6 +52,9 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="col-lg-6">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d825.4250387318641!2d18.868132229255234!3d-34.15401258897977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcdcb90ed07340d%3A0xaafeb49aa925decb!2s186%20Lancaster%20Rd%2C%20Dobson%2C%20Cape%20Town%2C%207140!5e0!3m2!1sen!2sza!4v1643024389042!5m2!1sen!2sza" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>

@@ -3,11 +3,35 @@ import uuid
 from django.db import models
 
 
+class PropertyQuerySet(models.QuerySet):
+    def filter_from_form(self, form_data):
+        qs = self.all()
+        if form_data["property_status"] != Property.PropertyStatus.ANY:
+            qs = qs.filter(property_status=form_data["property_status"])
+
+        if form_data["property_type"] != Property.PropertyType.ANY:
+            qs = qs.filter(property_type=form_data["property_type"])
+
+        if form_data["province"] != Property.Provinces.ANY:
+            qs = qs.filter(province=form_data["province"])
+
+        return qs.order_by("-created_at")
+
+
+class PropertyManager(models.Manager):
+    def get_queryset(self):
+        return PropertyQuerySet(self.model, using=self._db)
+
+    def filter_from_form(self, form_data):
+        return self.get_queryset().filter_from_form(form_data)
+
+
 class Property(models.Model):
     class Meta:
         verbose_name_plural = "properties"
 
     class PropertyType(models.TextChoices):
+        ANY = "ANY", ("Any")
         HOUSE = "H", ("House")
         APARTMENT = "AP", ("Apartment / Flat")
         TOWNHOUSE = "TH", ("Townhouse")
@@ -18,12 +42,14 @@ class Property(models.Model):
 
     # Status of wheter its for sale on to rent etc.
     class PropertyStatus(models.TextChoices):
+        ANY = "ANY", ("Any")
         SALE = "S", ("For Sale")
         RENT = "R", ("To Rent")
         FORCLOSURE = "F", ("Forclosure")
         AUCTION = "A", ("Auction")
 
     class Provinces(models.TextChoices):
+        ANY = "ANY", ("Any")
         FS = "FS", ("Free State")
         G = "G", ("Gauteng")
         KZN = "KZN", ("KwaZulu-Natal")
@@ -34,11 +60,16 @@ class Property(models.Model):
         WC = "WC", ("Western Cape")
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    objects = PropertyManager()
 
     # Property info
     title = models.CharField(max_length=255, default="")
-    property_type = models.CharField(max_length=4, choices=PropertyType.choices, null=True)
-    property_status = models.CharField(max_length=4, choices=PropertyStatus.choices, null=True)
+    property_type = models.CharField(
+        max_length=4, choices=PropertyType.choices, default=PropertyType.ANY, null=True
+    )
+    property_status = models.CharField(
+        max_length=4, choices=PropertyStatus.choices, default=PropertyStatus.ANY, null=True
+    )
     price = models.PositiveBigIntegerField()
     description = models.TextField(default="")
 
@@ -46,7 +77,7 @@ class Property(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=255, null=True)
     suburb = models.CharField(max_length=255, null=True)
-    province = models.CharField(max_length=4, choices=Provinces.choices, null=True)
+    province = models.CharField(max_length=4, choices=Provinces.choices, default=Provinces.ANY, null=True)
 
     # Property details
     bedrooms = models.PositiveSmallIntegerField(null=True)

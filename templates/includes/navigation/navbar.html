@@ -29,25 +29,26 @@
                 <li class="nav-item">
                     <a class="nav-link uppercase" href="#">Our Team</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'property_add' %}">Add new listing</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'account_login' %}">Sign In</a></li>
+                            <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign UP</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link uppercase btn primary-bg" href="{% url 'contact' %}">Contact Us</a>
                 </li>
-
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link uppercase border-start ms-3" href="{% url 'property_add' %}">+ Add new listing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link uppercase border-start ms-3" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item border-start">
-                        <a href="{% url 'account_login' %}" class="nav-link">Sign In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'account_signup' %}" class="nav-link">Sign Up</a>
-                    </li>
-                {% endif %}
             </ul>
         </div>
     </div>

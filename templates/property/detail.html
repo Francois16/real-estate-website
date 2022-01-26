@@ -2,9 +2,6 @@
 {% load static %}
 {% load humanize %}
 
-
-
-
 {% block content %}
     {% include "includes/navigation/navbar.html" %}
     <div class="container">
@@ -127,23 +124,21 @@
                                 <div class="col-12">
                                     <div class="row gy-2">
                                         {% for feature in property.features.all %}
-                                        <div class="col-4">
-                                            <div class="d-flex">
-                                                <box-icon name='check-square' type='solid' color='#03a433' ></box-icon>
-                                                <span class="text-muted ms-1">{{ feature|title }}</span>
+                                            <div class="col-4">
+                                                <div class="d-flex">
+                                                    <box-icon name='check-square' type='solid' color='#03a433' ></box-icon>
+                                                    <span class="text-muted ms-1">{{ feature|title }}</span>
+                                                </div>
                                             </div>
-                                        </div>
                                         {% endfor %}
                                     </div>
                                 </div>
                             {% endif %}
                         </div>
                     </div>
-                    
                 </div>
-                    
-                    
             </div>
+
             <div class="col-lg-4">
                 <div class="d-flex flex-column gap-3">
                     <div class="border rounded bg-white shadow p-4">

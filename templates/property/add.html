@@ -7,8 +7,8 @@
 {% endblock nav %}
 
 {% block content %}
-    <div class="container border bg-white p-3 mt-3">
-        <h2 class="mb-2 primary">Create a new property listing</h2>
+    <div class="container border bg-white p-3 mt-3 rounded">
+        <h2 class="mb-2 primary-text">Create a new property listing</h2>
         <form action="{% url 'property_add' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <h4 class='title-underline my-3'>Property Info</h4>
@@ -52,14 +52,9 @@
                 <div class="col-3">{{ form.levies|as_crispy_field }}</div>
                 <div class="col-3">{{ form.rates_and_taxes|as_crispy_field }}</div>
             </div>
-
-            
-
-
-
-
-
             <button class="btn btn-info my-3" type="submit">Add Property</button>
         </form>
     </div>
+
+    {% include 'includes/sections/footer.html' %}
 {% endblock content %}

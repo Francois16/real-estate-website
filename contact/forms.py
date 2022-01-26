@@ -6,7 +6,8 @@ class ContactForm(forms.Form):
     SUBJECT_CHOICES = (
         (None, "-------"),
         ("PPM", "Property Portfolio Management"),
-        ("RM", "Rental Managemnt"),
+        ("RM", "Rental Management"),
+        ("S", "Sell My Property"),
     )
 
     first_name = forms.CharField(max_length=55, required=True)
